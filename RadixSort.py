@@ -17,18 +17,32 @@ def get_radix(n):
         i += 1
     return i
 
-'''
-def counting_sort(radix_arr, place):
-    # Place the elements in sorted order
-    i = len(arr) - 1
 
-    while i >= 0:
-        digit = int(arr[i] % (place * 10) // place)
-        radix_arr[digit].Append(arr[i])
-        i -= 1
-    
+def counting_sort(radix_arr, radix):
+    temp_arr = []
+    for _ in range(10):
+        arr = []
+        temp_arr.append(arr)
+
+    for i in range(10):
+        runner = radix_arr[i].head
+        
+        while(runner):
+            # get the digit in question
+            digit = runner.node % (radix * 10) // radix
+
+            
+            # if it's in the right place
+            if (digit == i):
+                runner = runner.next
+
+            # else, move it 
+            else:
+                radix_arr[digit].Append(runner.node)
+                radix_arr[i].Delete(runner.node)
+                runner = runner.next
+            
     return radix_arr
-'''
 
 
 
@@ -41,19 +55,19 @@ def radix_sort(arr):
 
     # get max element and its number of digits
     max_element = get_max(arr)
-    num_radix = get_radix(max_element)
+    max_radix = get_radix(max_element)
     print(max_element)
-    print(num_radix)
+    print(max_radix)
 
-    # Initial filling of radix_arr with Numbers.txt
+    # Initial filling of array with Numbers.txt (radix 1)
     for num in arr:
         num = int(num)
         i = num % 10 
         radix_arr[i].Append(num)
 
-    # sort using counting sort
+    # sort array using counting sort
     radix = 10
-    for _ in range(num_radix):
+    for _ in range(max_radix - 1):
         counting_sort(radix_arr, radix)
         radix *= 10
 
