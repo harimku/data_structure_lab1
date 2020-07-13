@@ -209,6 +209,17 @@ class DList:
         if count == 0:
             print('<Empty List>')
 
+    # for printing Radix Sort output
+    def output(self):
+        rover = self.tail
+        count = 0
+
+        while (rover != None):  
+            print('Node {} : data={}'.format(str(count), str(rover.node)))
+            count += 1
+            rover = rover.prev
+        
+
  
 
 def main():       
