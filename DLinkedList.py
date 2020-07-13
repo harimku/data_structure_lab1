@@ -212,13 +212,13 @@ class DList:
 
     # for printing Radix Sort output
     def output(self):
-        rover = self.tail
+        rover = self.head
         count = 0
 
         while (rover != None):  
             print('Node {} : data={}'.format(str(count), str(rover.node)))
             count += 1
-            rover = rover.prev
+            rover = rover.next
         
 
  
