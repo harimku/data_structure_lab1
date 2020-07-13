@@ -143,33 +143,34 @@ class DList:
                 
     # deletes a node from the list
     def Delete(self,data):
-        if (self.tail == None):
+        if (self.head == None):
             print('There is no element to delete')
             return None
-        if (self.tail.node == data):
-            if(self.tail == self.head):
+        if (self.head.node == data):
+            if(self.head == self.tail):
                 self.tail = None
                 self.head = None
                 return None
-            self.tail = self.tail.prev
-            if(self.tail is None):
+            self.head = self.head.next
+            if(self.head is None):
                 return None
-            self.tail.next = None
+            self.head.prev = None
             return None
-        runner = self.tail
+
+        runner = self.head
         while(runner):
-            if runner.prev is not None and runner.prev.node is not None and runner.prev.node == data:
+            if runner.next is not None and runner.next.node is not None and runner.next.node == data:
                 break 
-            runner = runner.prev
+            runner = runner.next
         if runner is None:
             print('There is no such element in the list.')
             return None
-        if (runner.prev == self.head):
-            self.head = runner
-            self.head.prev = None
+        if (runner.next == self.tail):
+            self.tail = runner
+            self.tail.next = None
         else:
-            runner.prev = runner.prev.prev
-            runner.prev.next = runner
+            runner.next = runner.next.next
+            runner.next.prev = runner
 
     # returns number of nodes in list
     def Count(self):
@@ -234,8 +235,12 @@ def main():
     print('Operation: Append({})'.format(str(1)))
     print('Operation: Append({})'.format(str(2)))
     print('Operation: Append({})'.format(str(3)))
+    print('Operation: Append({})'.format(str(3)))
+    print('Operation: Append({})'.format(str(3)))
     dll.Append(1)
     dll.Append(2)
+    dll.Append(3)
+    dll.Append(3)
     dll.Append(3)
     print('')
     print('Current List:')
@@ -259,8 +264,14 @@ def main():
     print('Current List:')
     dll.Output()
     print('=================================================================')
-    print('Operation: Delete({})'.format(str(-777)))
+    print('Operation: Delete({})'.format(str(777)))
     dll.Delete(-777)
+    print('')
+    print('Current List:')
+    dll.Output()
+    print('=================================================================')
+    print('Operation: Delete({})'.format(str(3)))
+    dll.Delete(3)
     print('')
     print('Current List:')
     dll.Output()
@@ -304,10 +315,12 @@ def main():
     print('=================================================================')
     print('Operation: Delete(2)')
     print('Operation: Delete(3)')
+    print('Operation: Delete(3)')
     print('Operation: Delete(-1841)')
     print('Operation: Delete(1)')
     print('Operation: Delete(0)')
     dll.Delete(2)
+    dll.Delete(3)
     dll.Delete(3)
     dll.Delete(-1841)
     dll.Delete(1)
